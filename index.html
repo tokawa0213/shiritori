@@ -9,6 +9,21 @@
   </head>
 
   <body>
+    <!--begin: score-->
+    <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              Score : 0
+            </h1>
+            <h2 class="subtitle">
+              Next staring word : 「ほ」
+            </h2>
+          </div>
+        </div>
+    </section>
+    <!--end: score-->
+    <!--begin:form-->
     <div class="field is-grouped">
         <p class="control is-expanded has-icon-left">
           <input class="input is-success" type="text" placeholder="Enter name">
@@ -20,6 +35,53 @@
         </p>
     </div>
     <p class="help is-success has-text-centered">This answer is valid</p>
-  </body>
-
+    <!--end:form-->
+    <!--random_image_reference : https://picsum.photos/200-->
+    <!--begin:past answers-->
+    <div class="columns">
+        <div class="column">
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            <img src="https://picsum.photos/201">
+                        </figure>
+                    </div>
+                    <div class="media-content has-text-centered">
+                        <div class="content">
+                            <div class="title is-8">Answer 1</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="column">
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            <img src="https://picsum.photos/200">
+                        </figure>
+                    </div>
+                    <div class="media-content has-text-centered">
+                        <div class="content">
+                            <div class="title is-8">Answer 2</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--end:past answers-->
+    <!--begin: pop up-->
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            Display score, tweet, try again,
+            start button
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <!--end: pop up-->
 </html>
