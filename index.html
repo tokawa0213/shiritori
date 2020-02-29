@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Change title of the page</title>
+    <title>Shiritori</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <link rel="stylesheet" href="index.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -12,7 +12,7 @@
   <body>
   <div id="app">
     <!--begin: score-->
-    <section class="hero is-primary">
+    <section class="hero is-primary" id="score_screen">
         <div class="hero-body">
           <div class="container">
             <h1 class="title">
@@ -28,7 +28,7 @@
     </section>
     <!--end: score-->
     <!--begin:form-->
-    <div>
+    <div class="form">
         <div class="field is-grouped">
             <p v-if="is_valid_answer" class="control is-expanded has-icon-left">
                 <input v-model="entered_answer" v-on:keydown.enter="enter_answer" class="input" type="text" placeholder="Enter name">
@@ -59,14 +59,14 @@
     <!--end:form-->
     <!--random_image_reference : https://picsum.photos/200-->
     <!--begin:past answers-->
-    <div v-html="past_answers"></div>
+    <div class="columns" v-html="past_answers"></div>
     <!--end:past answers-->
     <!--begin: pop up-->
-    <div class="modal" v-bind:class="is_end_of_game">
+    <div class="modal" v-bind:class="finish_menu">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title has-text-centered">GAME OVER</p>
+              <p class="modal-card-title has-text-centered">{{game_result}}</p>
             </header>
             <section class="modal-card-body has-text-centered">
                 <p>あなたのスコアは{{calculate_score}}です</p>

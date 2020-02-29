@@ -1,0 +1,10 @@
+#score_screen{
+    height : 25vh;
+}
+.form{
+    height : 15vh;
+}
+.columns{
+    height : 60vh;
+    overflow-x: scroll;
+}

@@ -1,9 +1,4 @@
-//TODO: Implement computer player
-//TODO: start menu and score by time
-//TODO: multiplayer
-
 var names = Object.keys(zukan)
-
 function find_true_next_word(word){
   var replacing_letters = {
     'ガ':['カ','ガ'],'ギ':['キ','ギ'],'グ':['ク','グ'],'ゲ':['ケ','ゲ'],'ゴ':['コ','ゴ'],
@@ -31,8 +26,9 @@ var app = new Vue({
     data: {
       entered_answer : "",
       answered_names : ["アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワ".charAt(Math.round( Math.random()*43))],
-      //answered_names : ["チ"],
       past_answers : "",
+      finish_menu : "",
+      passed_time : 30
     },
     methods: {
       enter_answer : function(){
@@ -70,8 +66,10 @@ var app = new Vue({
               candidates.push(name)
             }
           })
-        if(!candidates){
-          //Computer lose
+        //empty array
+        if(!candidates.length){
+          this.answered_names.push("COMPUTER_LOST_VARIABLE")
+          return
         }
         //find word that has the most few starting words
         candidates_score = []
@@ -117,13 +115,19 @@ var app = new Vue({
       tweet : function(){
         var tweet_url = 'https://twitter.com/intent/tweet?text=' + "ツイッターシェアボタンのサンプルコード" + "%20%23しりとり" + '&url=' + "https://tokawa0213.github.io/shiritori/";
         location.href = tweet_url
-      }
+      },
     },
     computed:{
       calculate_score : function(){
+        if(this.answered_names[this.answered_names.length-1] == "COMPUTER_LOST_VARIABLE"){
+          return (this.answered_names.length * 100 - 200)/2
+        }
         return (this.answered_names.length * 100 - 100)/2
       },
       next_staring_word : function(){
+        if(this.answered_names[this.answered_names.length-1] == "COMPUTER_LOST_VARIABLE"){
+          return
+        }
         next_word = find_true_next_word(this.answered_names[this.answered_names.length-1])
         return next_word.join(",")
       },
@@ -134,16 +138,21 @@ var app = new Vue({
           return false
         }
       },
-      is_end_of_game: function(){
-        if(find_true_next_word(this.answered_names[this.answered_names.length-1])[0]=="ン"){
-          return "is-active"
-        }else{
-          if(this.answered_names.length != 1){
-            console.log("www")
-            this.computer_answer()
+      game_result: function(){
+        if(this.answered_names.length != 1){
+          this.computer_answer()
+        }
+        var next_letters = find_true_next_word(this.answered_names[this.answered_names.length-1])
+        if(this.answered_names[this.answered_names.length-1] == "COMPUTER_LOST_VARIABLE"){
+          this.finish_menu = "is-active"
+          if(find_true_next_word(this.answered_names[this.answered_names.length-2])[0] == "ン"){
+            return "YOU LOSE (Invalid answer)"
+          }else if(this.answered_names.filter(name => next_letters.indexOf(name[0])) == names.filter(name => name => next_letters.indexOf(name[0]))){
+            return "YOU LOSE (No more word)"
+          }else{
+            return "YOU WIN"
           }
         }
-        //TODO: No more vocab
       }
     }
 })
