@@ -4,7 +4,7 @@
 .form{
     height : 15vh;
 }
-.columns{
+.col{
     height : 60vh;
     overflow-x: scroll;
 }
